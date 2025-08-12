@@ -3,30 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Cloud Resume</title>
+    <title>David Martinez - Cloud Resume</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
         }
-        .container {
-            max-width: 800px;
+        header {
+            background: #4a90e2;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin-bottom: 10px;
+        }
+        nav {
+            background: #333;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            max-width: 900px;
             margin: auto;
-            background: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
-        h1 { color: #0078D7; }
+        section {
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+        }
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>David Martínez</h1>
-        <p>Automation Analyst | Futuro Cloud & DevOps Engineer</p>
-        <p>Este es mi proyecto Cloud Resume Challenge 🚀</p>
-    </div>
+    <header>
+        <h1>David Martinez</h1>
+        <p>Automation Analyst | Cloud Resume Challenge</p>
+        <p id="visitor-count">Visitas: <span id="count">0</span></p>
+    </header>
+
+    <nav>
+        <a href="#perfil">Perfil</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#educacion">Educación</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <main>
+        <section id="perfil">
+            <h2>Perfil</h2>
+            <p>Automation Analyst con experiencia en procesos de logística, calidad y desarrollo de soluciones con Power Automate, Power Apps y SharePoint. Apasionado por la automatización, la nube y el aprendizaje continuo.</p>
+        </section>
+
+        <section id="experiencia">
+            <h2>Experiencia</h2>
+            <ul>
+                <li>
+                    <strong>Automation Analyst</strong> - Diciembre 2024 - Actualidad
+                    <p>Desarrollo de flujos de automatización con Power Automate, optimización de procesos y creación de soluciones digitales.</p>
+                </li>
+                <li>
+                    <strong>Operaciones (Logística y Calidad)</strong> - 2022 - 2024
+                    <p>Gestión de inventarios, uso de Power BI para análisis de datos y automatización de notificaciones con Power Apps y Power Automate.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="educacion">
+            <h2>Educación</h2>
+            <ul>
+                <li>Ingeniería en Mecatronica - Facultad de Ingenieria Mecánica y Eléctrica, 2023</li>
+            </ul>
+        </section>
+
+        <section id="habilidades">
+            <h2>Habilidades</h2>
+            <ul>
+                <li>Power Automate, Power Apps, SharePoint</li>
+                <li>Automatización de procesos</li>
+                <li>HTML, CSS, JavaScript</li>
+                <li>Power BI</li>
+                <li>Inglés avanzado</li>
+            </ul>
+        </section>
+
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>Email: <a href="mailto:tuemail@example.com">tuemail@example.com</a></p>
+            <p>GitHub: <a href="https://github.com/DavidMF13" target="_blank">github.com/DavidMF13</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 David Martinez | Cloud Resume Challenge</p>
+    </footer>
+
+    <script>
+        // Script del contador (luego lo conectaremos al backend)
+        document.getElementById("count").textContent = 1; 
+    </script>
 </body>
 </html>
