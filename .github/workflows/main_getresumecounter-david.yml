@@ -1,8 +1,9 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/azure/functions-action
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure Functions: https://aka.ms/python-webapps-actions
+#
 
-name: Build and deploy Python project to Azure Function App - GetResumeCounter-david
+name: Build and deploy Python project to Azure Function App - cloudresume-function-david
 
 on:
   push:
@@ -11,8 +12,10 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_FUNCTIONAPP_PACKAGE_PATH: '.' # set this to the path to your web app project, defaults to the repository root
-  PYTHON_VERSION: '3.11' # set this to the python version to use (supports 3.6, 3.7, 3.8)
+  # establece la ruta de tu proyecto de funcion, por defecto es la raiz del repositorio
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: 'backend/api'
+  # establece la version de python a usar (soporta 3.6, 3.7, 3.8, 3.9, 3.10, 3.11)
+  PYTHON_VERSION: '3.11'
 
 jobs:
   build:
@@ -29,26 +32,21 @@ jobs:
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
-      - name: Create and start virtual environment
+      - name: 'Resolve project dependencies using Pip'
+        shell: bash
         run: |
-          python -m venv venv
-          source venv/bin/activate
-
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Optional: Add step to run tests here
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+          pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+          python -m pip install -r requirements.txt
+          popd
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: python-app
           path: |
-            release.zip
-            !venv/
+            ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+            !${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/.venv
+            !${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/.git
 
   deploy:
     runs-on: ubuntu-latest
@@ -59,27 +57,15 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
           name: python-app
-
-      - name: Unzip artifact for deployment
-        run: |
-          unzip release.zip
-          rm release.zip
-        
-      - name: Login to Azure
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_83C18E25183A4CC8A240D7CA3A766A28 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_57633C9186A64E9E8AEE48FABD42BE61 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0D4599B650E24CB9B2D0F6FFDA6FFB0B }}
 
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
         id: deploy-to-function
         with:
-          app-name: 'GetResumeCounter-david'
+          app-name: 'cloudresume-function-david'
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A29384792384793284729 }}
