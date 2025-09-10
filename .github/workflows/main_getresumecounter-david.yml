@@ -72,10 +72,11 @@ jobs:
         uses: Azure/functions-action@v1
         id: deploy-to-function
         with:
-          app-name: 'cloudresume-function-david'
+          app-name: 'GetResumeCounter-david'
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A29384792384793284729 }}
+
 
 
 
