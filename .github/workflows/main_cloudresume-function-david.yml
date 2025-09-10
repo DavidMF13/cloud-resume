@@ -41,7 +41,7 @@ jobs:
       # Optional: Add step to run tests here
 
       - name: Zip artifact for deployment
-        run: ]
+        run: |
           cd backend/api
           zip -r ../../release.zip .
 
@@ -87,6 +87,7 @@ jobs:
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
 
           
+
 
 
 
