@@ -61,6 +61,13 @@ jobs:
         with:
           name: python-app
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_83C18E25183A4CC8A240D7CA3A766A28 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_57633C9186A64E9E8AEE48FABD42BE61 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0D4599B650E24CB9B2D0F6FFDA6FFB0B }}
+
       - name: 'Deploy to Azure Functions'
         uses: Azure/functions-action@v1
         id: deploy-to-function
@@ -69,5 +76,6 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A29384792384793284729 }}
+
 
 
