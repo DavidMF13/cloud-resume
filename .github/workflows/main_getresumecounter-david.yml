@@ -67,6 +67,7 @@ jobs:
         with:
           app-name: 'cloudresume-function-david'
           slot-name: 'Production'
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A29384792384793284729 }}
+
 
