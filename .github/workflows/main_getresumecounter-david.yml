@@ -43,9 +43,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: |
-            ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-            !${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/.git
+          path: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -75,6 +73,7 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A29384792384793284729 }}
+
 
 
 
